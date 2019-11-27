@@ -5,8 +5,8 @@ $users = [
     new UserAdapter(new User()),
     new UserAdapter(new User()),
 ];
-$text = 'Какой-то тексе';
+$message = new TextMessage('Какой-то тексе');
 
 foreach ($users as $user) {
-    $service->notify($user, $text);
+    $service->notify($user, $message);
 }
