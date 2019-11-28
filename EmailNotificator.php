@@ -1,16 +1,7 @@
 <?php
 
-class EmailNotificator implements Notificator
+class EmailNotificator extends Notificator implements NotificationSender
 {
-    protected $recipient;
-    protected $message;
-
-    public function __construct(Recipient $recipient, NotificationMessage $message)
-    {
-        $this->recipient = $recipient;
-        $this->message = $message;
-    }
-
     public function send()
     {
         $email = $this->recipient->getContact(Recipient::CONTACT_TYPE_EMAIL);

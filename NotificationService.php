@@ -2,7 +2,7 @@
 
 class NotificationService
 {
-    public function notify(Notificator $notificator)
+    public function notify(NotificationSender $notificator)
     {
         $notificator->send();
     }
