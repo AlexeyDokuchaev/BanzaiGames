@@ -1,10 +1,19 @@
 <?php
 
-class SmsNotificator
+class SmsNotificator implements Notificator
 {
-    public function sendSms(Recipient $recipient, NotificationMessage $message)
+    protected $recipient;
+    protected $message;
+
+    public function __construct(Recipient $recipient, NotificationMessage $message)
     {
-        $phone = $recipient->getContact(Recipient::CONTACT_TYPE_PHONE);
-        $text = $message->getBody();
+        $this->recipient = $recipient;
+        $this->message = $message;
+    }
+
+    public function send()
+    {
+        $phone = $this->recipient->getContact(Recipient::CONTACT_TYPE_PHONE);
+        $text = $this->message->getBody();
     }
 }

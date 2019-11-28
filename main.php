@@ -2,11 +2,12 @@
 
 $service = new NotificationService();
 $users = [
-    new UserAdapter(new User()),
-    new UserAdapter(new User()),
+    new User(),
+    new User(),
 ];
 $message = new TextMessage('Какой-то тексе');
 
 foreach ($users as $user) {
-    $service->notify($user, $message);
+    $service->notify(new SmsNotificator(new UserAdapter($user), $message));
+    $service->notify(new EmailNotificator(new UserAdapter($user), $message));
 }

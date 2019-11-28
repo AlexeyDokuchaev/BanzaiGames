@@ -2,12 +2,8 @@
 
 class NotificationService
 {
-    public function notify(Recipient $recipient, NotificationMessage $message)
+    public function notify(Notificator $notificator)
     {
-        $emailNotificator = new EmailNotificator();
-        $smsNotificator = new SmsNotificator();
-
-        $emailNotificator->sendEmail($recipient, $message);
-        $smsNotificator->sendSms($recipient, $message);
+        $notificator->send();
     }
 }
