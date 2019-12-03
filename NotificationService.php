@@ -2,8 +2,25 @@
 
 class NotificationService
 {
-    public function notify(NotificationSender $notificator)
+    private $senders;
+
+    /**
+     * NotificationService constructor.
+     * @param NotificationSender[] $senders
+     */
+    public function __construct(array $senders)
     {
-        $notificator->send();
+        $this->senders = $senders;
+    }
+
+    public function notify($user, $text)
+    {
+        $message = new TextMessage($text);
+        $recipient = new UserAdapter($user);
+
+        foreach ($this->senders as $sender) {
+            $notificator = new Notificator($sender);
+            $notificator->send($recipient, $message);
+        }
     }
 }
