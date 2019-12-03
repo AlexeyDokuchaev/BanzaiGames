@@ -1,14 +1,19 @@
 <?php
+// Инициализация и конфигурация сервиса
+$service = new NotificationService([
+    new SmsNotificator(),
+    new EmailNotificator(),
+    new WebPushNotificator(),
+]);
 
-$service = new NotificationService();
 $users = [
     new User(),
     new User(),
 ];
-$message = new TextMessage('Какой-то текст');
 
+//region клиентская часть
+$text = 'Какой-то текст';
 foreach ($users as $user) {
-    $service->notify(new SmsNotificator(new UserAdapter($user), $message));
-    $service->notify(new EmailNotificator(new UserAdapter($user), $message));
-    $service->notify(new WebPushNotificator(new UserAdapter($user), $message));
+    $service->notify($user, $text);
 }
+//endregion

@@ -1,12 +1,12 @@
 <?php
 
 
-class WebPushNotificator extends Notificator implements NotificationSender
+class WebPushNotificator implements NotificationSender
 {
 
-    public function send()
+    public function send(Recipient $recipient, NotificationMessage $message)
     {
-        $sid = $this->recipient->getContact(Recipient::CONTACT_TYPE_SESSION);
-        $text = $this->message->getBody();
+        $sid = $recipient->getContact(Recipient::CONTACT_TYPE_SESSION);
+        $text = $message->getBody();
     }
 }

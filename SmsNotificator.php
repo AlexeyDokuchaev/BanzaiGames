@@ -1,11 +1,11 @@
 <?php
 
-class SmsNotificator extends Notificator implements NotificationSender
+class SmsNotificator implements NotificationSender
 {
-    public function send()
+    public function send(Recipient $recipient, NotificationMessage $message)
     {
-        $phone = $this->recipient->getContact(Recipient::CONTACT_TYPE_PHONE);
-        $text = $this->message->getBody();
+        $phone = $recipient->getContact(Recipient::CONTACT_TYPE_PHONE);
+        $text = $message->getBody();
     }
 }
 

@@ -1,14 +1,17 @@
 <?php
 
 
-abstract class Notificator
+class Notificator
 {
-    protected $recipient;
-    protected $message;
+    protected $sender;
 
-    public function __construct(Recipient $recipient, NotificationMessage $message)
+    public function __construct(NotificationSender $sender)
     {
-        $this->recipient = $recipient;
-        $this->message = $message;
+        $this->sender = $sender;
+    }
+
+    public function send(Recipient $recipient, NotificationMessage $message)
+    {
+        $this->sender->send($recipient, $message);
     }
 }
